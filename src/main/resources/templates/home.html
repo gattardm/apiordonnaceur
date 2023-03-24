@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ordonnanceur Web Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta http-equiv="refresh" content="1"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+  <style>
+	body {padding-top: 50px;}
+	.special {padding-top:50px;}
+	table, th, td { padding: 10px; border: 1px solid black; border-collapse: collapse; text-align: center}
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href=".">Système de gestion des messages d'urgence - ORDONNANCEUR</a>
+      </div>
+    </div>
+  </nav>
+      <!------------------------------------------------------------------------------
+      INCIDENTS
+      ------------------------------------------------------------------------------->
+      <div class="container special">
+        <h2 class="h2">Liste des incidents</h2>
+        <div class="table-responsive">
+          <table class="center">
+            <thead>
+            <tr>
+              <th>Identifiant</th>
+              <th>Type d'incident</th>
+              <th>Spécialité médicale préconisée</th>
+              <th>Longitude du lieu de l'incident</th>
+              <th>Latitude du lieu de l'incident</th>
+              <th>Incident traité?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${incidents.empty}">
+              <td colspan="3">Aucun incident en cours</td>
+            </tr>
+            <tr th:each="incident: ${incidents}">
+              <td><span th:text="${incident.id}"> Identifiant </span></td>
+              <td><span th:text="${incident.type}"> Type d'incident </span></td>
+              <td><span th:text="${incident.specialityNeeded}"> Spécialité médicale nécessaire </span></td>
+              <td><span th:text="${incident.longitude}"> Longitude de l'incident </span></td>
+              <td><span th:text="${incident.latitude}"> Latitude de l'incident </span></td>
+              <td><span th:text="${incident.traitement}"> Incident traité </span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!------------------------------------------------------------------------------
+       OPERATEURS
+       ------------------------------------------------------------------------------>
+      <div class="container special">
+        <h2 class="h2">Liste des opérateurs</h2>
+        <div class="table-responsive">
+          <table class="center">
+            <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Disponible</th>
+              <th>Incident attribué</th>
+              <th>Hopital identifié</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${operators.empty}">
+              <td colspan="3">Aucun opérateur disponible</td>
+            </tr>
+            <tr th:each="operator: ${operators}">
+              <td><span th:text="${operator.name}"> Nom </span></td>
+              <td><span th:text="${operator.available}"> Disponible </span></td>
+              <td><span th:text="${operator.incidentId}"> Incident attribué </span></td>
+              <td><span th:text="${operator.hospitalId}"> Hopital identifié </span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
